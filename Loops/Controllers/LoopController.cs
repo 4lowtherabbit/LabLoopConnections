@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -18,9 +19,17 @@ namespace Loops.Controllers
         static List<TcpClient> clients = new List<TcpClient>();
 
         // GET: Loop
-        public ActionResult Index()
+        public string Index()
         {
-            return View();
+            StringBuilder builder = new StringBuilder();
+            builder.AppendLine("Usage:<br/>");
+            builder.AppendLine("Start listening on local port: /Loop/StartListening");
+            builder.AppendLine("Add one more local loop connnection: /loop/AddLoop");
+            builder.AppendLine("Add one more weeak local loop connnection: /loop/AddWeakLoop");
+            builder.AppendLine("Close all connections and shut down listening: /loop/StopListening");
+            builder.AppendLine();
+            builder.AppendLine($"Currently loops count: {connections.Count}");
+            return builder.ToString();
         }
 
         public string StartListening()
@@ -50,10 +59,12 @@ namespace Loops.Controllers
             {
                 conn.Close();
             }
+            connections = new List<TcpClient>();
             foreach(var client in clients)
             {
                 client.Close();
             }
+            clients = new List<TcpClient>();
             listener.Stop();
 
             return "Stopped";
