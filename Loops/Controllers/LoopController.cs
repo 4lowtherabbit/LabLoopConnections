@@ -23,12 +23,12 @@ namespace Loops.Controllers
         {
             StringBuilder builder = new StringBuilder();
             builder.AppendLine("Usage:<br/>");
-            builder.AppendLine("Start listening on local port: /Loop/StartListening");
-            builder.AppendLine("Add one more local loop connnection: /loop/AddLoop");
-            builder.AppendLine("Add one more weeak local loop connnection: /loop/AddWeakLoop");
-            builder.AppendLine("Close all connections and shut down listening: /loop/StopListening");
-            builder.AppendLine();
-            builder.AppendLine($"Currently loops count: {connections.Count}");
+            builder.AppendLine("Start listening on local port: /Loop/StartListening<br/>");
+            builder.AppendLine("Add one more local loop connnection: /loop/AddLoop<br/>");
+            builder.AppendLine("Add one more weeak local loop connnection: /loop/AddWeakLoop<br/>");
+            builder.AppendLine("Close all connections and shut down listening: /loop/StopListening<br/>");
+            builder.AppendLine("<br/>");
+            builder.AppendLine($"Currently loops count: {connections.Count}<br/>");
             return builder.ToString();
         }
 
@@ -85,7 +85,7 @@ namespace Loops.Controllers
             {
                 clients.Add(sender);
             }
-            return $"Done. Current loop connnections count:{connections.Count}";
+            return $"Done. Current loop connnections count: {connections.Count}";
         }
 
         public string AddWeakLoop()
